@@ -28,3 +28,9 @@ process.nextTick(() => {
 Promise.resolve().then(() => {
   console.log("Promise.resolve().then()");
 })
+
+
+// ログ出力
+console.log("Hello");
+console.trace("World");
+console.log("Message: o%", {hello: "world"} );
