@@ -27,3 +27,19 @@ a();
 // indexedDB.js、bからaを呼ぶ
 var b = require("./lib/module-b/index");
 b();
+
+// EventEmitter
+var Clock = require("./event-emitter/clock");
+
+var i = 0;
+
+var clock = new Clock();
+
+clock.on("tick", () => {
+  console.log(++i);
+  if(i>3) {
+    clock.stop();
+  }
+});
+
+clock.start();
