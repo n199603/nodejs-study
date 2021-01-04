@@ -16,7 +16,7 @@ car.echo();
 car.drive();
 
 // config.jsより読み込み
-var config = require("./module/config.js")
+var config = require("./module/config.js");
 
 console.log(JSON.stringify(config));
 
@@ -30,9 +30,7 @@ b();
 
 // EventEmitter
 var Clock = require("./event-emitter/clock");
-
 var i = 0;
-
 var clock = new Clock();
 
 clock.on("tick", () => {
@@ -43,3 +41,16 @@ clock.on("tick", () => {
 });
 
 clock.start();
+
+// Eventを設定する
+var EventEmitter = require("events");
+var ee = new EventEmitter();
+var ontick = function() {
+  console.log("event is called");
+  ee.off("event", ontick);
+};
+
+ee.on("event", ontick);
+
+ee.emit("event");
+ee.emit("event");
