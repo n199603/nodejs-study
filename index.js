@@ -19,3 +19,11 @@ car.drive();
 var config = require("./module/config.js")
 
 console.log(JSON.stringify(config));
+
+// .jsなしでも可能
+var a = require("./lib/module-a/index");
+a();
+
+// indexedDB.js、bからaを呼ぶ
+var b = require("./lib/module-b/index");
+b();
