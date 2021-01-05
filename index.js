@@ -69,15 +69,25 @@ clock.start();
 // ee.emit("event");
 
 // function, arrow
+// var EventEmitter = require("events");
+// var ee = new EventEmitter();
+
+// ee.on("event", function() {
+//   console.log("function: \r\n", this);
+// });
+
+// ee.on("event", () => {
+//   console.log("arrow: \r\n", this);
+// });
+
+// ee.emit("event");
+
+// 実行順序
 var EventEmitter = require("events");
 var ee = new EventEmitter();
 
-ee.on("event", function() {
-  console.log("function: \r\n", this);
-});
-
-ee.on("event", () => {
-  console.log("arrow: \r\n", this);
-});
+ee.on("event", () => {console.log("event 1st");});
+ee.on("event", () => {console.log("event 2st");});
+ee.on("event", () => {console.log("event 3st");});
 
 ee.emit("event");
