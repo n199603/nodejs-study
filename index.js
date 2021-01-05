@@ -43,14 +43,41 @@ clock.on("tick", () => {
 clock.start();
 
 // Eventを設定する
+// var EventEmitter = require("events");
+// const { once } = require("process");
+// var ee = new EventEmitter();
+// var ontick = function() {
+//   console.log("event is called");
+//   ee.off("event", ontick);
+// };
+
+// ee.on("event", ontick);
+
+// ee.emit("event");
+// ee.emit("event");
+
+// once
+// var EventEmitter = require("events");
+// var ee = new EventEmitter();
+// var ontick = function() {
+//   console.log("event is called");
+// };
+
+// ee.once("event", ontick);
+
+// ee.emit("event");
+// ee.emit("event");
+
+// function, arrow
 var EventEmitter = require("events");
 var ee = new EventEmitter();
-var ontick = function() {
-  console.log("event is called");
-  ee.off("event", ontick);
-};
 
-ee.on("event", ontick);
+ee.on("event", function() {
+  console.log("function: \r\n", this);
+});
 
-ee.emit("event");
+ee.on("event", () => {
+  console.log("arrow: \r\n", this);
+});
+
 ee.emit("event");
