@@ -91,3 +91,12 @@ ee.on("event", () => {console.log("event 2st");});
 ee.on("event", () => {console.log("event 3st");});
 
 ee.emit("event");
+
+// パス
+var path = require("path")
+var filepath = "dev/node-js/sample/index.js";
+console.log(path.dirname(filepath));
+console.log(path.basename(filepath));
+console.log(path.extname(filepath));
+console.log(path.join("dev/node-js/sample", "index.js"));
+console.log(path.normalize("dev/node-js/sample/lib/../index.js"));
