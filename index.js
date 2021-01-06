@@ -149,19 +149,36 @@
 //   });
 
 // async, awaitに書き換え
+// var fs = require("fs");
+// var path = require("path");
+// var util = require("util");
+
+// var readFile = util.promisify(fs.readFile);
+// var writeFile = util.promisify(fs.writeFile);
+
+// (async function() {
+//   try {
+//     var data = await readFile(path.join(__dirname, "sample.txt"), "utf8");
+//     await writeFile(path.join(__dirname, "sample-copy4.txt"), data, "utf8");
+//     console.log("OK");
+//   } catch (error) {
+//     console.log(err.message);
+//   }
+// })();
+
+// テキストをストリームで読み込み
 var fs = require("fs");
 var path = require("path");
-var util = require("util");
+var data = "";
+var reader = fs.createReadStream(path.join(__dirname, "sample.txt"), "utf8");
 
-var readFile = util.promisify(fs.readFile);
-var writeFile = util.promisify(fs.writeFile);
+reader.on("data", (chunk) => {
+  data += chunk;
+});
+reader.on("end", () => {
+  console.log(data);
+});
 
-(async function() {
-  try {
-    var data = await readFile(path.join(__dirname, "sample.txt"), "utf8");
-    await writeFile(path.join(__dirname, "sample-copy4.txt"), data, "utf8");
-    console.log("OK");
-  } catch (error) {
-    console.log(err.message);
-  }
-})();
+reader.resume();
+
+// テキストをストリームで読み込み
