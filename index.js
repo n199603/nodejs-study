@@ -167,18 +167,29 @@
 // })();
 
 // テキストをストリームで読み込み
+// var fs = require("fs");
+// var path = require("path");
+// var data = "";
+// var reader = fs.createReadStream(path.join(__dirname, "sample.txt"), "utf8");
+
+// reader.on("data", (chunk) => {
+//   data += chunk;
+// });
+// reader.on("end", () => {
+//   console.log(data);
+// });
+
+// reader.resume();
+
+// テキストをストリームで書き込み
 var fs = require("fs");
 var path = require("path");
-var data = "";
+// var writer = fs.createWriteStream((__dirname, "created.txt"), "utf8");
+
+// writer.end("Hello World!");
+
 var reader = fs.createReadStream(path.join(__dirname, "sample.txt"), "utf8");
+var writer = fs.createWriteStream(path.join(__dirname, "sample-copy5.txt"), "utf8");
 
-reader.on("data", (chunk) => {
-  data += chunk;
-});
-reader.on("end", () => {
-  console.log(data);
-});
-
+reader.pipe(writer);
 reader.resume();
-
-// テキストをストリームで読み込み
